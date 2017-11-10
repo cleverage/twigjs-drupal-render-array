@@ -1,0 +1,15 @@
+{
+  "#theme": "index",
+  "#property": "Condimentum Pharetra",
+  "#another_property": 666,
+  "children": {
+    "child1": {
+      "#theme": "partial",
+      "#yolo": "Bibendum Ullamcorper Dolor"
+    },
+    "child2": {
+      "#theme": "partial",
+      "#yolo": "second depht"
+    }
+  }
+}

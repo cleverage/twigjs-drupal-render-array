@@ -1,0 +1,29 @@
+{
+  "name": "twig-drupal-render-array",
+  "version": "0.0.0",
+  "description": "Extend twig js to support drupal 8 render array",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha && eslint ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@git.clever-age.net:yliechti/twig-drupal-render-array.git"
+  },
+  "keywords": [
+    "twigjs",
+    "twig",
+    "drupal8"
+  ],
+  "author": "Clever Age",
+  "license": "MIT",
+  "peerDependencies": {
+    "twig": "^1.10"
+  },
+  "devDependencies": {
+    "chai": "^4.1.2",
+    "eslint": "^4.10.0",
+    "mocha": "^3.5.0",
+    "twig": "^1.10"
+  }
+}
