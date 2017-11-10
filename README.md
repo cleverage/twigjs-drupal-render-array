@@ -49,5 +49,6 @@ Twig.renderFile('myTemplate.html.twig', dataTransformer(data), (err, result) => 
 
 Twig.js use `.toString()` method to render an Object, so we create two new type of Object:
 
- * `RenderObject`: `.toString()` return render of twig file matching `#theme` entry
+ * `RenderVar`: `.toString()` return render of twig file matching `#theme` entry with every var without `#`
+ * `RenderElement`: `.toString()` return render of twig file matching `#theme` entry with data in a variable named by `render element` key from data
  * `RenderCollection`: `.toString()` return joined string of each children
