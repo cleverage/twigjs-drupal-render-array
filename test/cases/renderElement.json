@@ -1,0 +1,9 @@
+{
+  "#theme": "index",
+  "#property": "Condimentum Pharetra",
+  "#another_property": 666,
+  "children": {
+    "#theme": "element",
+    "render element": "element"
+  }
+}
