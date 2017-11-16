@@ -1,5 +1,5 @@
 {
-  "name": "twig-drupal-render-array",
+  "name": "@cleverage/twig-drupal-render-array",
   "version": "0.0.0",
   "description": "Extend twig js to support drupal 8 render array",
   "main": "index.js",
@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git@git.clever-age.net:yliechti/twig-drupal-render-array.git"
+    "url": "git+ssh://git@git.clever-age.net:yliechti/twig-drupal-render-array.git"
   },
   "keywords": [
     "twigjs",

@@ -20,7 +20,11 @@ npm install git@git.clever-age.net:yliechti/twig-drupal-render-array.git
 
 ```javascript
 const Twig = require('twig');
-const dataTransformer = require('twig-drupal-render-array')(Twig);
+const dataTransformer = require('twig-drupal-render-array')(Twig, {
+  pathResolver: (key) => {
+    return key + '.html';
+  }
+});
 ```
 
 ## Use

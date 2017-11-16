@@ -1,49 +1,69 @@
-function drupalDataTransformer(Twig) {
-  const fs = require('fs');
+const fs = require('fs');
+const path = require('path');
 
-  function RenderElement(obj) {
-    Object.keys(obj).map((key) => {
-      this[key] = toDrupalTwigJsData(obj[key]);
+function defaultPathResolver(key) {
+  return path.join('./test/twig', key + '.html.twig');
+}
+
+const defaultOptions = {
+  pathResolver: defaultPathResolver
+};
+
+function drupalDataTransformer(Twig, options) {
+  if (!options) {
+    options = {};
+  }
+  const cfg = Object.assign({}, defaultOptions, options);
+
+  const pathResolver = cfg.pathResolver;
+
+  function heritKeys(origin, destination, replaceSharp) {
+    replaceSharp = replaceSharp === true;
+
+    Object.keys(origin).map((key) => {
+      if (key.indexOf('_') === 0) {
+        destination[key] = origin[key];
+
+        return;
+      }
+
+      const newkey = replaceSharp ? key.replace(/^#/, '') : key;
+
+      destination[newkey] = toDrupalTwigJsData(origin[key]);
     });
   }
 
+  function RenderElement(obj) {
+    var newObject = {};
+
+    heritKeys(obj, newObject, false);
+    Reflect.deleteProperty(newObject, 'render element');
+    this.renderElement = new RenderVar(newObject);
+    this.renderElement[obj['render element']] = new RenderVar(newObject);
+  }
+
   RenderElement.prototype.toString = function toString() {
-    let source = null;
-
-    try {
-      source = fs.readFileSync('./test/twig/' + this['#theme'] + '.html.twig', 'utf8');
-    } catch (err) {
-      return '';
-    }
-
-    const template = Twig.twig({
-      data: source
-    });
-
-
-    const data = {};
-
-    data[this['render element']] = this;
-
-    return template.render(data);
+    return this.renderElement.toString();
   };
 
   function RenderVar(obj) {
     // Remove first `#`
-    Object.keys(obj).map((key) => {
-      this[key.replace(/^#/, '')] = toDrupalTwigJsData(obj[key]);
-    });
+    heritKeys(obj, this, true);
   }
 
   RenderVar.prototype.toString = function toString() {
     let source = '';
+    const filePath = pathResolver(this.theme);
 
     try {
-      source = fs.readFileSync('./test/twig/' + this.theme + '.html.twig', 'utf8');
+      source = fs.readFileSync(filePath, 'utf8');
     } catch (err) {
-      return this.markup;
+      if (this.markup) {
+        return this.markup;
+      }
     }
     const template = Twig.twig({
+      path: filePath,
       data: source
     });
 
@@ -51,9 +71,7 @@ function drupalDataTransformer(Twig) {
   };
 
   function RenderCollection(obj) {
-    Object.keys(obj).map((key) => {
-      this[key] = toDrupalTwigJsData(obj[key]);
-    });
+    heritKeys(obj, this);
   }
 
   RenderCollection.prototype.toString = function toString() {
