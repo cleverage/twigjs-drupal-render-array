@@ -20,7 +20,7 @@ npm install cleverage/twigjs-drupal-render-array#master
 
 ```javascript
 const Twig = require('twig');
-const dataTransformer = require('twig-drupal-render-array')(Twig);
+const dataTransformer = require('twigjs-drupal-render-array')(Twig);
 ```
 
 ## Use
