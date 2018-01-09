@@ -13,10 +13,10 @@ But twig.js do not support some Drupal 8 behavior
 ## Install
 
 ```bash
-npm install git@git.clever-age.net:yliechti/twig-drupal-render-array.git
+npm install cleverage/twigjs-drupal-render-array#master
 ```
 
-> NB: this module should move to Github and be published on NPM
+> NB: this module will be published on NPM soon
 
 ```javascript
 const Twig = require('twig');
