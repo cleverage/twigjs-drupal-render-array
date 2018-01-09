@@ -1,5 +1,5 @@
 {
-  "name": "twig-drupal-render-array",
+  "name": "twigjs-drupal-render-array",
   "version": "0.0.0",
   "description": "Extend twig js to support drupal 8 render array",
   "main": "index.js",
